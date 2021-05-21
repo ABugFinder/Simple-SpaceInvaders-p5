@@ -60,12 +60,17 @@ function draw() {
     }
 
     var edge = false;
+    var bottom = false;
     for(var i = 0; i < aliens.length; i++){
         aliens[i].show();
         aliens[i].move();
 
         if(aliens[i].x > width || aliens[i].x < 0) {
             edge = true;
+        }
+
+        if(aliens[i].y >= height-40) {
+            bottom = true;
         }
     }
 
@@ -74,11 +79,39 @@ function draw() {
             aliens[i].moveAlienDown();
         }
     }
+
+    if(bottom){
+        player.substractLive();
+        document.getElementById("puntos").innerHTML = `Enemigos restantes: ${aliens.length}  | Vidas: ${player.lives}`;
+        resetGame();
+    }
+
+    if(player.lives < 0) {
+        gameOver();
+    }
+}
+
+function resetGame(){
+    alienHelperX = 80;
+    alienHelperY = 10;
+    for(var i = 0; i < 45; i++){
+        if(i%9==0){
+            alienHelperX = 80;
+            alienHelperY += 60;
+        }
+        aliens[i] = new Alien(alienHelperX,alienHelperY);
+        alienHelperX+=80;
+        aliens[i].resetSpeed();
+    }
+}
+
+function gameOver() {
+    document.getElementById("puntos").innerHTML = `Perdiste. Presiona F5 o refresca la pantalla para volver a jugar`;
 }
 
 function updateKillCounter(){
     //text(`${this.p1} - ${this.p2}`, this.x, this.y);
-    document.getElementById("puntos").innerHTML = `Enemigos restantes: ${aliens.length}`;
+    document.getElementById("puntos").innerHTML = `Enemigos restantes: ${aliens.length}  | Vidas: ${player.lives}`;
 }
 
 function movePlayer(){

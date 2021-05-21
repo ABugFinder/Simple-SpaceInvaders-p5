@@ -33,4 +33,8 @@ function Alien(x, y) {
         }
     }
 
+    this.resetSpeed = function() {
+        this.xdir = 0.8;
+    }
+
 }

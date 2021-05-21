@@ -7,6 +7,18 @@ body {
     text-align: center;
 }
 
+.centrarh2 {
+    text-align: center;
+}
+
+.centrarh3 {
+    text-align: center;
+}
+
+.centrarh4 {
+    text-align: center;
+}
+
 .box {
     display: flex;
     align-items: center;

@@ -1,5 +1,6 @@
 function Player() {
     this.x = width/2;
+    this.lives = 2;
 
     this.show = function() {
         fill(152, 15, 0);
@@ -8,5 +9,9 @@ function Player() {
 
     this.move = function(dir) {
         this.x += dir;
+    }
+
+    this.substractLive = function() {
+        this.lives--;
     }
 }
