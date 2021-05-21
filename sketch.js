@@ -37,10 +37,41 @@ function draw() {
     for(var i = 0; i < balas.length; i++){
         balas[i].show();
         balas[i].move();
+
+        for(var j = 0; j < aliens.length; j++){
+            if(balas[i].hits(aliens[j])) {
+                console.log("Colisión bala-alien");
+                balas[i].killBullet();
+                aliens[j].killAlien();
+            }
+            if(!aliens[j].isAlive){
+                aliens.splice(j, 1);
+            }
+        }
+
+        if(balas[i].isToDelete){
+            balas.splice(i, 1);
+            for(var i = 0; i < aliens.length; i++){
+                aliens[i].speedUp();
+            }
+        }
+
     }
 
+    var edge = false;
     for(var i = 0; i < aliens.length; i++){
         aliens[i].show();
+        aliens[i].move();
+
+        if(aliens[i].x > width || aliens[i].x < 0) {
+            edge = true;
+        }
+    }
+
+    if(edge){
+        for(var i = 0; i < aliens.length; i++){
+            aliens[i].moveAlienDown();
+        }
     }
 }
 
