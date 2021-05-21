@@ -8,7 +8,7 @@ var player;
 var balas = [];
 var aliens = [];
 var alienHelperX = 80;
-var alienHelperY = 60;
+var alienHelperY = 10;
 
 function setup(){
     let myCanvas = createCanvas(boardWidth, boardHeight);
@@ -16,7 +16,7 @@ function setup(){
     player = new Player();
     //bala = new Bala(50,80);
     
-    for(var i = 0; i < 36; i++){
+    for(var i = 0; i < 45; i++){
         if(i%9==0){
             alienHelperX = 80;
             alienHelperY += 60;
@@ -46,6 +46,7 @@ function draw() {
             }
             if(!aliens[j].isAlive){
                 aliens.splice(j, 1);
+                updateKillCounter();
             }
         }
 
@@ -75,29 +76,9 @@ function draw() {
     }
 }
 
-
-
-function addPointsToP1(){
-    player1Points++;
-}
-
-function actualizarPuntos(){
-    if(xBallPos <= 0){
-        player2Points++;
-    }
-    if(xBallPos >= boardWidth){
-        player1Points++;
-    }
+function updateKillCounter(){
     //text(`${this.p1} - ${this.p2}`, this.x, this.y);
-    document.getElementById("puntos").innerHTML = `Player1: ${player1Points} - ${player2Points} Player2 `;
-}
-
-function keyPressed() {
-    if(keyCode === RIGHT_ARROW) {
-        player.move(25);
-    } else if(keyCode === LEFT_ARROW) {
-        player.move(-25);
-    }
+    document.getElementById("puntos").innerHTML = `Enemigos restantes: ${aliens.length}`;
 }
 
 function movePlayer(){
