@@ -84,10 +84,13 @@ function draw() {
         player.substractLive();
         document.getElementById("puntos").innerHTML = `Enemigos restantes: ${aliens.length}  | Vidas: ${player.lives}`;
         resetGame();
+        
     }
+    winGame();
 
     if(player.lives < 0) {
         gameOver();
+        noLoop();
     }
 }
 
@@ -104,6 +107,8 @@ function resetGame(){
         aliens[i].resetSpeed();
     }
 }
+
+
 
 function gameOver() {
     document.getElementById("puntos").innerHTML = `Perdiste. Presiona F5 o refresca la pantalla para volver a jugar`;
@@ -138,3 +143,17 @@ function keyPressed(){
         balas.push(bala);
     }
 }
+
+
+function winGame(){
+    if(aliens.length == 0){
+
+        console.log("ganaste");
+        var audio = document.getElementById("audio");
+        audio.play();
+        document.getElementById("puntos").innerHTML = `GANASTE!!!. Presiona F5 o refresca la pantalla para volver a jugar`;
+        noLoop();
+
+    }
+   
+} 
